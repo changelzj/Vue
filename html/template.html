@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>{{msg}}</h2>
+    <h2>{{msg.toUpperCase()}}</h2>
+    <h2>{{msg}}</h2>
+    <p v-text="uri"></p> <!--标签体文本-->
+    <p v-html="uri"></p> <!--标签-->
+    <img v-bind:src="imgurl"/>
+    <img :src="imgurl"/>
+
+    <button v-on:click="fun">按钮</button>
+    <button @click="fun">按钮2</button>
+    <button @click='fun2("hi")'>按钮3</button>
+    <button @click='fun2(msg)'>按钮3</button>
+</div>
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            msg: 'i am a bit',
+            uri: '<a href="http://www.qq.com">qq</a>',
+            imgurl: 'https://cn.vuejs.org/images/logo.png'
+        },
+        methods: {
+            fun (event) {
+                console.log(event);
+            },
+            fun2(e) {
+                console.log(e);
+            }
+        }
+    });
+
+
+
+</script>
+</body>
+</html>
+

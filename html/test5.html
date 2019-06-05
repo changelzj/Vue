@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="div">
+    <h2>遍历数组</h2>
+
+    <table border="1" width="500">
+
+        <tr v-for="(p, index) in persons">
+            <td>{{index}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.age}}</td>
+            <td>
+                <button v-on:click="deleteOne(index)">删除</button>
+            </td>
+            <td>
+                <button v-on:click="update(index)">更新</button>
+            </td>
+        </tr>
+
+
+    </table>
+
+    <h2>遍历对象</h2>
+
+    <ul>
+        <li v-for="item in persons[1]">
+            {{item}}
+        </li>
+    </ul>
+
+    <ul>
+        <li v-for="(item, key) in persons[1]">
+            {{key}} -- {{item}}
+        </li>
+    </ul>
+
+</div>
+</body>
+</html>
+
+<script>
+    const vm = new Vue({
+        el: '#div',
+        data: {
+            persons:[
+                {name:'zhang',age:22},
+                {name:'lili',age:18},
+                {name:'jiang',age:25},
+                {name:'川建国',age:55},
+            ]
+        },
+        methods: {
+            update: function (index) {
+                this.persons.splice(index, 1, { name:'cat', age:6 });
+                console.log(this.persons);
+            },
+            deleteOne:function (index) {
+                this.persons.splice(index, 1);
+            }
+        }
+    });
+</script>
+
+

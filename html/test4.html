@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <span v-if="flag">已经退款</span>
+        <span v-else>未退款</span>
+
+        <span v-show="flag">付款成功</span>
+<!--        v-if 的隐藏是移除，v-show是display 设为none-->
+
+        <button v-on:click="flag = !flag">改变状态</button>
+    </div>
+</body>
+</html>
+
+<script>
+    const vm = new Vue({
+        el:'#demo',
+        data: {
+            flag:true
+        },
+        methods:{
+
+        }
+    });
+
+</script>
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="demo">
+        姓：<input type="text" v-model="firstname"/><br>
+        名：<input type="text" v-model="lastname"/><br>
+        姓名：<input type="text" v-model="fullname" /><br>
+        姓名：<input type="text" v-model="fullname2"/><br>
+        姓名（双向）：<input type="text" v-model="fullname3"/><br>
+
+        <p>{{fullname3}}</p>
+        <p>{{fullname3}}</p>
+        <p>{{fullname3}}</p>
+        <p>{{fullname3}}</p>
+        <p>{{fullname3}}</p>
+        <p>{{fullname3}}</p>
+    </div>
+</body>
+
+
+</html>
+
+<script>
+    let vm = new Vue({
+        el: '#demo',
+        data: {
+            firstname: 'A',
+            lastname: 'B',
+            fullname2: ''
+        },
+        computed: {
+            fullname() {
+                // computed内计算属性，初始化和相关数据发生变化要执行
+                return this.firstname + ' ' + this.lastname;
+            },
+            fullname3 :{
+                // get set
+                get() {
+                    // 存在缓存，多次取值只会调用一次
+                    return this.firstname + ' ' + this.lastname;
+                },
+                set(val) {
+                    var arr = val.split(' ');
+                    this.firstname = arr[0];
+                    this.lastname = arr[1];
+                }
+            }
+        },
+        watch: {
+            // 监视属性变化
+            firstname: function (newVal, oldVal) {
+                this.fullname2 = newVal + ' ' + this.lastname;
+            }
+        },
+        methods: {
+
+        }
+    });
+
+    vm.$watch('lastname', function (newVal, oldVal) {
+        this.fullname2 = this.firstname +' '+ newVal;
+    });
+
+
+
+</script>
+
+
+

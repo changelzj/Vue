@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class style绑定</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .my {
+            color: red;
+        }
+
+        .b {
+            color: green;
+        }
+
+        .c{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <h2 class="c" v-bind:class="myclass">class绑定，多个样式会合并</h2>
+
+        <h2>style绑定</h2>
+
+        <h3 v-bind:class="{b:true, c:false}">使用对象设置样式</h3>
+
+        <h3 v-bind:class="{b:isb, c:isc}">使用对象设置样式</h3>
+
+        <h3 v-bind:class="['b', 'c']">数组</h3>
+
+        <h2 v-bind:style="{color: color, fontSize: fontsize}">Style</h2>
+
+        <button v-on:click="updateClass">更改class</button>
+    </div>
+</body>
+</html>
+
+<script>
+    const vm = new Vue({
+        el: '#div',
+        data: {
+            myclass: 'my',
+            isb: true,
+            isc: true,
+            color: 'yellow',
+            fontsize: '20px'
+        },
+        methods: {
+            updateClass: function (e) {
+                this.myclass = 'b';
+                this.isc = false;
+            }
+        }
+    });
+</script>
+

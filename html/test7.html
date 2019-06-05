@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="div">
+        <h2>绑定监听</h2>
+        <button v-on:click="fun">按钮1</button>
+        <button v-on:click="fun2('hello')">按钮2</button>
+        <button v-on:click="fun3('abc', $event)">event</button>
+
+        <h2>事件修饰符</h2>
+        <div style="height: 200px; width: 200px; background-color: yellow;" v-on:click="bigdiv">
+            <div style="height: 100px; width: 100px; background-color: blue;" v-on:click.stop="smalldiv">
+                <!--                阻止事件冒泡-->
+            </div>
+        </div>
+        <!-- 阻止默认行为-->
+        <a href="http://www.qq.com" v-on:click.prevent="testlink">去往腾讯</a>
+
+
+        <h2>按键修饰符</h2>
+
+        <input type="text" v-on:keyup="keyup" />
+    </div>
+
+</body>
+</html>
+<script>
+    const vm = new Vue({
+        el: '#div',
+        data: {
+
+        },
+        methods:{
+            fun() {
+                alert("fun");
+            },
+            fun2:function (msg) {
+                alert(msg);
+            },
+            fun3:function (msg, event) {
+                console.log(msg);
+                console.log(event.target.innerHTML);
+            },
+            bigdiv:function (e) {
+                alert("big!");
+            },
+            smalldiv:function (e) {
+                alert("small!");
+            },
+            testlink:function (e) {
+                alert("test link");
+            },
+            keyup: function (e) {
+                alert(e.target.value);
+            }
+        }
+    });
+</script>
