@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>指令</title>
+    <style type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script>
+        // 注册全局指令 el 指令所在标签对象，包含指令相关信息的对象
+        Vue.directive("uppercase", function (el, binding) {
+            el.textContent = binding.value.toUpperCase();
+        });
+        
+        jQuery(function ($) {
+            const vm = new Vue({
+                el:'#div',
+                data:{
+                    msg:"message",
+                    msg1:"aacccccccccccaaaaaa",
+                    msg2:"AAAAABBBBBBBBBAAAAAA"
+                },
+                methods:{
+                    hint() {
+                        alert(this.$refs.p.textContent);
+                    }
+                },
+                //局部指令，当前实例范围内才有效
+                directives:{
+                    'lowercase': function (el, binding) {
+                        el.textContent = binding.value.toLowerCase();
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="div">
+        <button v-on:click="hint">toggle</button>
+        <p ref="p">www.google.com</p>
+        <p v-cloak>{{msg}}</p><!--防止标签闪现，v-cloak解析后消失，display属性也随之消失-->
+        <!--自定义指令-->
+        <p v-uppercase="msg1"></p>
+        <p v-lowercase="msg2"></p>
+    </div>
+</body>
+</html>
+

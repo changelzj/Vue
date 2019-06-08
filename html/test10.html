@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡和动画</title>
+    <style type="text/css">
+        .xxx-enter-active, .xxx-leave-active {
+            transition: opacity .5s;
+        }
+        .xxx-enter, .xxx-leave-to  {
+            opacity: 0;
+        }
+
+        .yyy-enter-active, .yyy-leave-active {
+            transition: all 3s;
+            transform: translateX(20px);
+            
+        }
+        .yyy-enter, .yyy-leave-to  {
+            opacity: 0;
+        }
+    </style>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            const vm = new Vue({
+                el: '#div',
+                data: {
+                    isShow:true,
+                    isShow2:true,
+                },
+                methods: {
+                    
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="div">
+        <button v-on:click="isShow = !isShow">toggle</button>
+        <transition name="xxx">
+            <h1 v-show="isShow">Vue.js</h1>
+        </transition>
+        
+        <button v-on:click="isShow2 = !isShow2">toggle2</button>
+        <transition name="yyy">
+            <h2 v-show="isShow2">东百大太君</h2>
+        </transition>
+    </div>
+</body>
+</html>
+
+

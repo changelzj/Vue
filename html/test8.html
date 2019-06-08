@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单输入的绑定</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script>
+        window.onload = function () {
+            const vm = new Vue({
+                el:'#dev',
+                data: {
+                    username:undefined,
+                    password:undefined,
+                    gender:'女',
+                    city:1,
+                    citys:[
+                        {id:1, name:'北京'},
+                        {id:2, name:'保定'},
+                        {id:3, name:'承德'}
+                    ],
+                    hobby:['羽毛球'],
+                    desc:undefined
+                },
+                methods:{
+                    handleSubmit:function (e) {
+                        console.log(this.username, this.password);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="dev">
+        <form v-on:submit.prevent="handleSubmit">
+            用户名：<input type="text" v-model="username"><br>
+            密码：<input type="text" v-model="password"><br>
+            性别：<input type="radio" name="gender" value="男" v-model="gender">男
+                 <input type="radio" name="gender" value="女" v-model="gender">女 <br>
+            爱好：<input type="checkbox" name="hobby" value="篮球" v-model="hobby">篮球
+                 <input type="checkbox" name="hobby" value="羽毛球" v-model="hobby">羽毛球
+                 <input type="checkbox" name="hobby" value="乒乓球" v-model="hobby">乒乓球<br>
+            城市：<select v-model="city">
+                    <option v-bind:value="city.id" v-for="(city, index) in citys">
+                        {{city.name}}
+                    </option>
+                 </select>
+            <br>
+            个人说明：<textarea rows="10" v-model="desc"></textarea>
+            <br>
+
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</body>
+</html>
+

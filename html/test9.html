@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            // 初始化显示，更新显示，死亡
+            const vm = new Vue({
+                el:'#div',
+                data:{
+                    isShow:true
+                },
+                methods:{
+                    destoryVm() {
+                        // 销毁Vue实例
+                        this.$destroy();
+                    }
+                },
+                beforeCreate() {
+                    console.log("beforeCreate");
+                },
+                created() {
+                    console.log("created");
+                },
+                beforeMount() {
+                    console.log('beforeMount');
+                },
+                mounted() {
+                    console.log('mounted');
+                    // 回调函数，初始化显示后调用
+                    let _this = this;
+                    this.id = setInterval(function () {
+                        _this.isShow = ! _this.isShow;
+                        console.log("setInterval ...");
+                    }, 200);
+                },
+                beforeUpdate() {
+                    console.log("beforeUpdate");
+                },
+                updated() {
+                    console.log("updated");
+                },
+                beforeDestroy() {
+                    // 回调，销毁之前
+                    console.log("beforeDestroy");
+                },
+                destroyed() {
+                    // 回调，销毁后
+                    console.log("destroyed");
+                    clearInterval(this.id);
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="div">
+        <button v-on:click="destoryVm">销毁实例</button>
+        <h1 v-show="isShow">Vue.js</h1>
+    </div>
+</body>
+</html>
+

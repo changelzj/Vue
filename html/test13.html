@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开发插件</title>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script src="../plugins/vue-plugin.js"></script>
+    <script>
+        // 声明使用插件 ，会调用install，传入Vue
+        Vue.use(MyPlugin);
+        
+        Vue.myGlobalMethod();// 使用插件的全局方法
+        
+        jQuery(function ($) {
+            const vm = new Vue({
+                el:'#div',
+                data:{
+                    msg:'i love you'
+                },
+                methods:{
+                    
+                }
+            });
+            
+            // 使用实例方法
+            vm.$myMethod();
+        })
+    </script>
+</head>
+<body>
+    <div id="div">
+        <span v-my-directive="msg">
+            
+        </span>
+    </div>
+</body>
+</html>

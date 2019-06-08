@@ -23,8 +23,9 @@
 
 
         <h2>按键修饰符</h2>
-
         <input type="text" v-on:keyup="keyup" />
+        <input type="text" v-on:keyup.13="keyup" />
+        <input type="text" v-on:keyup.enter="keyup" />
     </div>
 
 </body>
@@ -57,6 +58,7 @@
             },
             keyup: function (e) {
                 alert(e.target.value);
+
             }
         }
     });

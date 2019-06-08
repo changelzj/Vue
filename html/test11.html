@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/moment.min.js"></script>
+    <script>
+        // 自定义过滤器
+        Vue.filter('dateFilter', function (value, format) {
+            return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss');
+        });
+        
+        jQuery(function ($) {
+            const vm = new Vue({
+                el:'#div',
+                data:{
+                    date: new Date()
+                },
+                methods:{
+                    
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    <div id="div">
+        <h3>{{date}}</h3>
+        <h3>{{date | dateFilter('YYYY-MM-DD HH:mm:ss')}}</h3>
+        <h3>{{date | dateFilter('YYYY-MM-DD')}}</h3>
+        <h3>{{date | dateFilter('HH:mm:ss')}}</h3>
+    </div>
+</body>
+</html>
+
+
